@@ -30,3 +30,9 @@ $mkdir django-lessons
 $git init
 $git clone https://github.com/JorisPaarde/django-lessons.git
 ```
+
+migrate to get database working:
+```
+python3 manage.py migrate --plan
+python3 manage.py migrate
+```
