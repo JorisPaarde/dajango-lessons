@@ -1,1 +1,1 @@
-web: python manage.py
+web: gunicorn django-lessons.wsgi:application
