@@ -6,7 +6,7 @@ These are my django framework lesson files.
 
 JorisPaarde
 
-setup:
+## setup:
 
 ```
 $pip3 install django
@@ -23,7 +23,7 @@ start building app:
 $python3 manage.py startapp todo
 ```
 
-make a local clone
+## make a local clone
 
 ```
 $mkdir django-lessons
@@ -36,3 +36,28 @@ migrate to get database working:
 python3 manage.py migrate --plan
 python3 manage.py migrate
 ```
+
+# heroku setup:
+
+postgres database
+pip 3 install psycopg2-binary
+
+web server
+pip 3 install gunicorn
+
+## connect to remote database
+
+pip3 install dj-database-url
+
+adjust settings.py:
+ 
+```
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse('<url from heroku database>')
+}
+```
+
+unset PGHOSTADDR
+python3 manage.py migrate
