@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os
+
+development = os.environ.get('DEVELOPMENT', False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)cm3r2daite@iy#@%sp+&lv@_31h1ss#^j1hr7tqykkckb$3+l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = development
 
-ALLOWED_HOSTS = ['django-todo-jorisp.herokuapp.com']
+if development:
+    ALLOWED_HOSTS = ['localhost']
+else:
+    ALLOWED_HOSTS = ['django-todo-jorisp.herokuapp.com']
+
 
 
 # Application definition
@@ -75,16 +82,17 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES = {
-    'default': dj_database_url.parse('postgres://rmekxnprfejese:2e895f83226775c264500f69d9176f3393fddda2814d074d9b91d9d68e6a3952@ec2-52-6-211-59.compute-1.amazonaws.com:5432/dbakdtb3lt9ecb')
-}
+if development:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.parse('postgres://rmekxnprfejese:2e895f83226775c264500f69d9176f3393fddda2814d074d9b91d9d68e6a3952@ec2-52-6-211-59.compute-1.amazonaws.com:5432/dbakdtb3lt9ecb')
+    }                                   # postgres://rmekxnprfejese:2e895f83226775c264500f69d9176f3393fddda2814d074d9b91d9d68e6a3952@ec2-52-6-211-59.compute-1.amazonaws.com:5432/dbakdtb3lt9ecb
 
 
 # Password validation
